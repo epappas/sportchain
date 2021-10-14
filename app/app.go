@@ -88,6 +88,9 @@ import (
 
 	"github.com/epappas/sportchain/docs"
 
+	namespacemodule "github.com/epappas/sportchain/x/namespace"
+	namespacemodulekeeper "github.com/epappas/sportchain/x/namespace/keeper"
+	namespacemoduletypes "github.com/epappas/sportchain/x/namespace/types"
 	sportchainmodule "github.com/epappas/sportchain/x/sportchain"
 	sportchainmodulekeeper "github.com/epappas/sportchain/x/sportchain/keeper"
 	sportchainmoduletypes "github.com/epappas/sportchain/x/sportchain/types"
@@ -142,18 +145,20 @@ var (
 		transfer.AppModuleBasic{},
 		vesting.AppModuleBasic{},
 		sportchainmodule.AppModuleBasic{},
+		namespacemodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
 	// module account permissions
 	maccPerms = map[string][]string{
-		authtypes.FeeCollectorName:     nil,
-		distrtypes.ModuleName:          nil,
-		minttypes.ModuleName:           {authtypes.Minter},
-		stakingtypes.BondedPoolName:    {authtypes.Burner, authtypes.Staking},
-		stakingtypes.NotBondedPoolName: {authtypes.Burner, authtypes.Staking},
-		govtypes.ModuleName:            {authtypes.Burner},
-		ibctransfertypes.ModuleName:    {authtypes.Minter, authtypes.Burner},
+		authtypes.FeeCollectorName:      nil,
+		distrtypes.ModuleName:           nil,
+		minttypes.ModuleName:            {authtypes.Minter},
+		stakingtypes.BondedPoolName:     {authtypes.Burner, authtypes.Staking},
+		stakingtypes.NotBondedPoolName:  {authtypes.Burner, authtypes.Staking},
+		govtypes.ModuleName:             {authtypes.Burner},
+		ibctransfertypes.ModuleName:     {authtypes.Minter, authtypes.Burner},
+		namespacemoduletypes.ModuleName: {authtypes.Minter, authtypes.Burner, authtypes.Staking},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 )
@@ -211,6 +216,8 @@ type App struct {
 	ScopedTransferKeeper capabilitykeeper.ScopedKeeper
 
 	SportchainKeeper sportchainmodulekeeper.Keeper
+
+	NamespaceKeeper namespacemodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// the module manager
@@ -245,6 +252,7 @@ func New(
 		govtypes.StoreKey, paramstypes.StoreKey, ibchost.StoreKey, upgradetypes.StoreKey, feegrant.StoreKey,
 		evidencetypes.StoreKey, ibctransfertypes.StoreKey, capabilitytypes.StoreKey,
 		sportchainmoduletypes.StoreKey,
+		namespacemoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -350,6 +358,15 @@ func New(
 	)
 	sportchainModule := sportchainmodule.NewAppModule(appCodec, app.SportchainKeeper)
 
+	app.NamespaceKeeper = *namespacemodulekeeper.NewKeeper(
+		appCodec,
+		keys[namespacemoduletypes.StoreKey],
+		keys[namespacemoduletypes.MemStoreKey],
+
+		app.BankKeeper,
+	)
+	namespaceModule := namespacemodule.NewAppModule(appCodec, app.NamespaceKeeper)
+
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	// Create static IBC router, add transfer route, then set and seal it
@@ -389,6 +406,7 @@ func New(
 		params.NewAppModule(app.ParamsKeeper),
 		transferModule,
 		sportchainModule,
+		namespaceModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
@@ -424,6 +442,7 @@ func New(
 		evidencetypes.ModuleName,
 		ibctransfertypes.ModuleName,
 		sportchainmoduletypes.ModuleName,
+		namespacemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
@@ -612,6 +631,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(ibctransfertypes.ModuleName)
 	paramsKeeper.Subspace(ibchost.ModuleName)
 	paramsKeeper.Subspace(sportchainmoduletypes.ModuleName)
+	paramsKeeper.Subspace(namespacemoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper
