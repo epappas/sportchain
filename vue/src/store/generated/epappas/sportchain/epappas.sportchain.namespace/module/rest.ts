@@ -11,6 +11,10 @@
 
 export type NamespaceMsgBuyNameResponse = object;
 
+export type NamespaceMsgDeleteNameResponse = object;
+
+export type NamespaceMsgSetNameResponse = object;
+
 export interface ProtobufAny {
   "@type"?: string;
 }

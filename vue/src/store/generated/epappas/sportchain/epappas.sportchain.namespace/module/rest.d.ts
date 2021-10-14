@@ -1,4 +1,6 @@
 export declare type NamespaceMsgBuyNameResponse = object;
+export declare type NamespaceMsgDeleteNameResponse = object;
+export declare type NamespaceMsgSetNameResponse = object;
 export interface ProtobufAny {
     "@type"?: string;
 }

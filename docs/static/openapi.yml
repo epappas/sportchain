@@ -19779,6 +19779,10 @@ definitions:
       response type.
   epappas.sportchain.namespace.MsgBuyNameResponse:
     type: object
+  epappas.sportchain.namespace.MsgDeleteNameResponse:
+    type: object
+  epappas.sportchain.namespace.MsgSetNameResponse:
+    type: object
   epappas.sportchain.sportchain.MsgCreatePostResponse:
     type: object
     properties:
