@@ -3,13 +3,29 @@ package epappas.sportchain.sportchain;
 
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
-// this line is used by starport scaffolding # 1
+import "sportchain/post.proto";
 
 option go_package = "github.com/epappas/sportchain/x/sportchain/types";
 
 // Query defines the gRPC querier service.
 service Query {
-    // this line is used by starport scaffolding # 2
+    // Queries a list of posts items.
+	rpc Posts(QueryPostsRequest) returns (QueryPostsResponse) {
+		option (google.api.http).get = "/epappas/sportchain/sportchain/posts";
+	}
+
+// this line is used by starport scaffolding # 2
+}
+
+message QueryPostsRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryPostsResponse {
+  // Returning a list of posts
+  repeated Post Post = 1;
+  // Adding pagination to response
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3

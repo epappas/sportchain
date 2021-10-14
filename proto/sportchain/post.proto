@@ -1,0 +1,10 @@
+syntax = "proto3";
+package epappas.sportchain.sportchain;
+option go_package = "github.com/epappas/sportchain/x/sportchain/types";
+
+message Post {
+  string creator = 1;
+  uint64 id = 2;
+  string title = 3;
+  string body = 4;
+}
