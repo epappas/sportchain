@@ -19777,6 +19777,8 @@ definitions:
     description: >-
       MsgCreateVestingAccountResponse defines the Msg/CreateVestingAccount
       response type.
+  epappas.sportchain.namespace.MsgBuyNameResponse:
+    type: object
   epappas.sportchain.sportchain.MsgCreatePostResponse:
     type: object
     properties:
