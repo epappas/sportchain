@@ -3,13 +3,43 @@ package epappas.sportchain.namespace;
 
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
+import "namespace/whois.proto";
 // this line is used by starport scaffolding # 1
+import "gogoproto/gogo.proto";
 
 option go_package = "github.com/epappas/sportchain/x/namespace/types";
 
 // Query defines the gRPC querier service.
 service Query {
-    // this line is used by starport scaffolding # 2
+    // Queries a whois by index.
+	rpc Whois(QueryGetWhoisRequest) returns (QueryGetWhoisResponse) {
+		option (google.api.http).get = "/epappas/sportchain/namespace/whois/{index}";
+	}
+
+	// Queries a list of whois items.
+	rpc WhoisAll(QueryAllWhoisRequest) returns (QueryAllWhoisResponse) {
+		option (google.api.http).get = "/epappas/sportchain/namespace/whois";
+	}
+
+// this line is used by starport scaffolding # 2
+}
+
+message QueryGetWhoisRequest {
+	  string index = 1;
+
+}
+
+message QueryGetWhoisResponse {
+	Whois whois = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllWhoisRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllWhoisResponse {
+	repeated Whois whois = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3

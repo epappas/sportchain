@@ -3,12 +3,12 @@ import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
 import { MsgDeleteName } from "./types/namespace/tx";
-import { MsgBuyName } from "./types/namespace/tx";
 import { MsgSetName } from "./types/namespace/tx";
+import { MsgBuyName } from "./types/namespace/tx";
 const types = [
     ["/epappas.sportchain.namespace.MsgDeleteName", MsgDeleteName],
-    ["/epappas.sportchain.namespace.MsgBuyName", MsgBuyName],
     ["/epappas.sportchain.namespace.MsgSetName", MsgSetName],
+    ["/epappas.sportchain.namespace.MsgBuyName", MsgBuyName],
 ];
 export const MissingWalletError = new Error("wallet is required");
 const registry = new Registry(types);
@@ -24,8 +24,8 @@ const txClient = async (wallet, { addr: addr } = { addr: "http://localhost:26657
     return {
         signAndBroadcast: (msgs, { fee, memo } = { fee: defaultFee, memo: "" }) => client.signAndBroadcast(address, msgs, fee, memo),
         msgDeleteName: (data) => ({ typeUrl: "/epappas.sportchain.namespace.MsgDeleteName", value: data }),
-        msgBuyName: (data) => ({ typeUrl: "/epappas.sportchain.namespace.MsgBuyName", value: data }),
         msgSetName: (data) => ({ typeUrl: "/epappas.sportchain.namespace.MsgSetName", value: data }),
+        msgBuyName: (data) => ({ typeUrl: "/epappas.sportchain.namespace.MsgBuyName", value: data }),
     };
 };
 const queryClient = async ({ addr: addr } = { addr: "http://localhost:1317" }) => {

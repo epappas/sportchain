@@ -1,0 +1,16 @@
+syntax = "proto3";
+package epappas.sportchain.namespace;
+
+option go_package = "github.com/epappas/sportchain/x/namespace/types";
+
+
+
+message Whois {
+  string index = 1; 
+  string name = 2; 
+  string value = 3; 
+  string price = 4; 
+  string owner = 5; 
+  
+}
+
