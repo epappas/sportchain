@@ -6,6 +6,8 @@ accounts:
 validator:
   name: alice
   staked: "100000000stake"
+build:
+  main: "cmd/sportchaind"
 client:
   openapi:
     path: "docs/static/openapi.yml"
