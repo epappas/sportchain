@@ -91,6 +91,9 @@ import (
 	namespacemodule "github.com/epappas/sportchain/x/namespace"
 	namespacemodulekeeper "github.com/epappas/sportchain/x/namespace/keeper"
 	namespacemoduletypes "github.com/epappas/sportchain/x/namespace/types"
+	scavengemodule "github.com/epappas/sportchain/x/scavenge"
+	scavengemodulekeeper "github.com/epappas/sportchain/x/scavenge/keeper"
+	scavengemoduletypes "github.com/epappas/sportchain/x/scavenge/types"
 	sportchainmodule "github.com/epappas/sportchain/x/sportchain"
 	sportchainmodulekeeper "github.com/epappas/sportchain/x/sportchain/keeper"
 	sportchainmoduletypes "github.com/epappas/sportchain/x/sportchain/types"
@@ -146,6 +149,7 @@ var (
 		vesting.AppModuleBasic{},
 		sportchainmodule.AppModuleBasic{},
 		namespacemodule.AppModuleBasic{},
+		scavengemodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -159,6 +163,7 @@ var (
 		govtypes.ModuleName:             {authtypes.Burner},
 		ibctransfertypes.ModuleName:     {authtypes.Minter, authtypes.Burner},
 		namespacemoduletypes.ModuleName: {authtypes.Minter, authtypes.Burner, authtypes.Staking},
+		scavengemoduletypes.ModuleName:  {authtypes.Minter, authtypes.Burner, authtypes.Staking},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 )
@@ -218,6 +223,8 @@ type App struct {
 	SportchainKeeper sportchainmodulekeeper.Keeper
 
 	NamespaceKeeper namespacemodulekeeper.Keeper
+
+	ScavengeKeeper scavengemodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// the module manager
@@ -253,6 +260,7 @@ func New(
 		evidencetypes.StoreKey, ibctransfertypes.StoreKey, capabilitytypes.StoreKey,
 		sportchainmoduletypes.StoreKey,
 		namespacemoduletypes.StoreKey,
+		scavengemoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -367,6 +375,15 @@ func New(
 	)
 	namespaceModule := namespacemodule.NewAppModule(appCodec, app.NamespaceKeeper)
 
+	app.ScavengeKeeper = *scavengemodulekeeper.NewKeeper(
+		appCodec,
+		keys[scavengemoduletypes.StoreKey],
+		keys[scavengemoduletypes.MemStoreKey],
+
+		app.BankKeeper,
+	)
+	scavengeModule := scavengemodule.NewAppModule(appCodec, app.ScavengeKeeper)
+
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	// Create static IBC router, add transfer route, then set and seal it
@@ -407,6 +424,7 @@ func New(
 		transferModule,
 		sportchainModule,
 		namespaceModule,
+		scavengeModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
@@ -443,6 +461,7 @@ func New(
 		ibctransfertypes.ModuleName,
 		sportchainmoduletypes.ModuleName,
 		namespacemoduletypes.ModuleName,
+		scavengemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
@@ -632,6 +651,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(ibchost.ModuleName)
 	paramsKeeper.Subspace(sportchainmoduletypes.ModuleName)
 	paramsKeeper.Subspace(namespacemoduletypes.ModuleName)
+	paramsKeeper.Subspace(scavengemoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper

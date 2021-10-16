@@ -1,11 +1,13 @@
 // THIS FILE IS GENERATED AUTOMATICALLY. DO NOT MODIFY.
 
 import EpappasSportchainEpappasSportchainNamespace from './epappas/sportchain/epappas.sportchain.namespace'
+import EpappasSportchainEpappasSportchainScavenge from './epappas/sportchain/epappas.sportchain.scavenge'
 import EpappasSportchainEpappasSportchainSportchain from './epappas/sportchain/epappas.sportchain.sportchain'
 
 
 export default { 
   EpappasSportchainEpappasSportchainNamespace: load(EpappasSportchainEpappasSportchainNamespace, 'epappas.sportchain.namespace'),
+  EpappasSportchainEpappasSportchainScavenge: load(EpappasSportchainEpappasSportchainScavenge, 'epappas.sportchain.scavenge'),
   EpappasSportchainEpappasSportchainSportchain: load(EpappasSportchainEpappasSportchainSportchain, 'epappas.sportchain.sportchain'),
   
 }

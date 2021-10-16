@@ -1,0 +1,14 @@
+syntax = "proto3";
+package epappas.sportchain.scavenge;
+
+option go_package = "github.com/epappas/sportchain/x/scavenge/types";
+
+
+
+message Commit {
+  string index = 1; 
+  string solutionHash = 2; 
+  string solutionScavengerHash = 3; 
+  
+}
+
