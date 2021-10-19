@@ -1,0 +1,19 @@
+syntax = "proto3";
+package cosmonaut.interchange.interdex;
+
+import "interdex/sell_order_book.proto";
+import "interdex/buy_order_book.proto";
+import "interdex/denom_trace.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/cosmonaut/interchange/x/interdex/types";
+
+// GenesisState defines the interdex module's genesis state.
+message GenesisState {
+    string port_id = 1;
+  repeated SellOrderBook sellOrderBookList = 2 [(gogoproto.nullable) = false];
+  repeated BuyOrderBook buyOrderBookList = 3 [(gogoproto.nullable) = false];
+  repeated DenomTrace denomTraceList = 4 [(gogoproto.nullable) = false];
+  // this line is used by starport scaffolding # genesis/proto/state
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+package cosmonaut.interchange.interdex;
+
+option go_package = "github.com/cosmonaut/interchange/x/interdex/types";
+
+
+
+message BuyOrderBook {
+  string index = 1; 
+  string amountDenom = 2; 
+  string priceDenom = 3; 
+  
+}
+
