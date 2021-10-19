@@ -1,0 +1,15 @@
+syntax = "proto3";
+package epappas.sportchain.blog;
+
+option go_package = "github.com/epappas/sportchain/x/blog/types";
+
+import "gogoproto/gogo.proto";
+
+
+message Post {
+  uint64 id = 1;
+  string title = 2; 
+  string content = 3; 
+  string author = 4; 
+  
+}

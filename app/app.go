@@ -88,6 +88,9 @@ import (
 
 	"github.com/epappas/sportchain/docs"
 
+	blogmodule "github.com/epappas/sportchain/x/blog"
+	blogmodulekeeper "github.com/epappas/sportchain/x/blog/keeper"
+	blogmoduletypes "github.com/epappas/sportchain/x/blog/types"
 	namespacemodule "github.com/epappas/sportchain/x/namespace"
 	namespacemodulekeeper "github.com/epappas/sportchain/x/namespace/keeper"
 	namespacemoduletypes "github.com/epappas/sportchain/x/namespace/types"
@@ -150,6 +153,7 @@ var (
 		sportchainmodule.AppModuleBasic{},
 		namespacemodule.AppModuleBasic{},
 		scavengemodule.AppModuleBasic{},
+		blogmodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -224,7 +228,9 @@ type App struct {
 
 	NamespaceKeeper namespacemodulekeeper.Keeper
 
-	ScavengeKeeper scavengemodulekeeper.Keeper
+	ScavengeKeeper   scavengemodulekeeper.Keeper
+	ScopedBlogKeeper capabilitykeeper.ScopedKeeper
+	BlogKeeper       blogmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// the module manager
@@ -261,6 +267,7 @@ func New(
 		sportchainmoduletypes.StoreKey,
 		namespacemoduletypes.StoreKey,
 		scavengemoduletypes.StoreKey,
+		blogmoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -384,11 +391,24 @@ func New(
 	)
 	scavengeModule := scavengemodule.NewAppModule(appCodec, app.ScavengeKeeper)
 
+	scopedBlogKeeper := app.CapabilityKeeper.ScopeToModule(blogmoduletypes.ModuleName)
+	app.ScopedBlogKeeper = scopedBlogKeeper
+	app.BlogKeeper = *blogmodulekeeper.NewKeeper(
+		appCodec,
+		keys[blogmoduletypes.StoreKey],
+		keys[blogmoduletypes.MemStoreKey],
+		app.IBCKeeper.ChannelKeeper,
+		&app.IBCKeeper.PortKeeper,
+		scopedBlogKeeper,
+	)
+	blogModule := blogmodule.NewAppModule(appCodec, app.BlogKeeper)
+
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	// Create static IBC router, add transfer route, then set and seal it
 	ibcRouter := ibcporttypes.NewRouter()
 	ibcRouter.AddRoute(ibctransfertypes.ModuleName, transferModule)
+	ibcRouter.AddRoute(blogmoduletypes.ModuleName, blogModule)
 	// this line is used by starport scaffolding # ibc/app/router
 	app.IBCKeeper.SetRouter(ibcRouter)
 
@@ -425,6 +445,7 @@ func New(
 		sportchainModule,
 		namespaceModule,
 		scavengeModule,
+		blogModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
@@ -462,6 +483,7 @@ func New(
 		sportchainmoduletypes.ModuleName,
 		namespacemoduletypes.ModuleName,
 		scavengemoduletypes.ModuleName,
+		blogmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
@@ -652,6 +674,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(sportchainmoduletypes.ModuleName)
 	paramsKeeper.Subspace(namespacemoduletypes.ModuleName)
 	paramsKeeper.Subspace(scavengemoduletypes.ModuleName)
+	paramsKeeper.Subspace(blogmoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper
