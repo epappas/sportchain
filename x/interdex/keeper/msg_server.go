@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/cosmonaut/interchange/x/interdex/types"
+	"github.com/cryptodata/interchange/x/interdex/types"
 )
 
 type msgServer struct {

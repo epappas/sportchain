@@ -3,9 +3,9 @@ package keeper
 import (
 	"context"
 
-	"github.com/cosmonaut/interchange/x/interdex/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	clienttypes "github.com/cosmos/ibc-go/modules/core/02-client/types"
+	"github.com/cryptodata/interchange/x/interdex/types"
 )
 
 func (k msgServer) SendSellOrder(goCtx context.Context, msg *types.MsgSendSellOrder) (*types.MsgSendSellOrderResponse, error) {

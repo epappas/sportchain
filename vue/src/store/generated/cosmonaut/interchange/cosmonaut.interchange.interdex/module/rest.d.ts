@@ -192,7 +192,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags Query
      * @name QueryBuyOrderBookAll
      * @summary Queries a list of buyOrderBook items.
-     * @request GET:/cosmonaut/interchange/interdex/buyOrderBook
+     * @request GET:/cryptodata/interchange/interdex/buyOrderBook
      */
     queryBuyOrderBookAll: (query?: {
         "pagination.key"?: string;
@@ -207,7 +207,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags Query
      * @name QueryBuyOrderBook
      * @summary Queries a buyOrderBook by index.
-     * @request GET:/cosmonaut/interchange/interdex/buyOrderBook/{index}
+     * @request GET:/cryptodata/interchange/interdex/buyOrderBook/{index}
      */
     queryBuyOrderBook: (index: string, params?: RequestParams) => Promise<HttpResponse<InterdexQueryGetBuyOrderBookResponse, RpcStatus>>;
     /**
@@ -216,7 +216,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags Query
      * @name QueryDenomTraceAll
      * @summary Queries a list of denomTrace items.
-     * @request GET:/cosmonaut/interchange/interdex/denomTrace
+     * @request GET:/cryptodata/interchange/interdex/denomTrace
      */
     queryDenomTraceAll: (query?: {
         "pagination.key"?: string;
@@ -231,7 +231,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags Query
      * @name QueryDenomTrace
      * @summary Queries a denomTrace by index.
-     * @request GET:/cosmonaut/interchange/interdex/denomTrace/{index}
+     * @request GET:/cryptodata/interchange/interdex/denomTrace/{index}
      */
     queryDenomTrace: (index: string, params?: RequestParams) => Promise<HttpResponse<InterdexQueryGetDenomTraceResponse, RpcStatus>>;
     /**
@@ -240,7 +240,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags Query
      * @name QuerySellOrderBookAll
      * @summary Queries a list of sellOrderBook items.
-     * @request GET:/cosmonaut/interchange/interdex/sellOrderBook
+     * @request GET:/cryptodata/interchange/interdex/sellOrderBook
      */
     querySellOrderBookAll: (query?: {
         "pagination.key"?: string;
@@ -255,7 +255,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @tags Query
      * @name QuerySellOrderBook
      * @summary Queries a sellOrderBook by index.
-     * @request GET:/cosmonaut/interchange/interdex/sellOrderBook/{index}
+     * @request GET:/cryptodata/interchange/interdex/sellOrderBook/{index}
      */
     querySellOrderBook: (index: string, params?: RequestParams) => Promise<HttpResponse<InterdexQueryGetSellOrderBookResponse, RpcStatus>>;
 }

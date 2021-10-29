@@ -12,9 +12,9 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/cosmonaut/interchange/testutil/network"
-	"github.com/cosmonaut/interchange/x/interdex/client/cli"
-	"github.com/cosmonaut/interchange/x/interdex/types"
+	"github.com/cryptodata/interchange/testutil/network"
+	"github.com/cryptodata/interchange/x/interdex/client/cli"
+	"github.com/cryptodata/interchange/x/interdex/types"
 )
 
 // Prevent strconv unused error

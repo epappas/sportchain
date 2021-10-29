@@ -1,9 +1,9 @@
 package interdex
 
 import (
-	"github.com/cosmonaut/interchange/x/interdex/keeper"
-	"github.com/cosmonaut/interchange/x/interdex/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cryptodata/interchange/x/interdex/keeper"
+	"github.com/cryptodata/interchange/x/interdex/types"
 )
 
 // InitGenesis initializes the capability module's state from a provided genesis

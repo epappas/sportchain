@@ -1,12 +1,12 @@
 package keeper
 
 import (
-	"github.com/cosmonaut/interchange/x/interdex/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	capabilitytypes "github.com/cosmos/cosmos-sdk/x/capability/types"
 	channeltypes "github.com/cosmos/ibc-go/modules/core/04-channel/types"
 	host "github.com/cosmos/ibc-go/modules/core/24-host"
+	"github.com/cryptodata/interchange/x/interdex/types"
 )
 
 // ChanCloseInit defines a wrapper function for the channel Keeper's function

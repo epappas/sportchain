@@ -3,7 +3,7 @@ package types_test
 import (
 	"testing"
 
-	"github.com/cosmonaut/interchange/x/interdex/types"
+	"github.com/cryptodata/interchange/x/interdex/types"
 	"github.com/stretchr/testify/require"
 )
 

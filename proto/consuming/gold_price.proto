@@ -1,0 +1,13 @@
+syntax = "proto3";
+package cosmonaut.interchange.consuming;
+
+option go_package = "github.com/cryptodata/interchange/x/consuming/types";
+
+message GoldPriceCallData {
+  repeated string symbols = 1;
+  uint64 multiplier = 2;
+}
+
+message GoldPriceResult {
+  repeated uint64 rates = 1;
+}

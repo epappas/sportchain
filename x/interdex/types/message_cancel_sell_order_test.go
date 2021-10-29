@@ -3,8 +3,8 @@ package types
 import (
 	"testing"
 
-	"github.com/cosmonaut/interchange/testutil/sample"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/cryptodata/interchange/testutil/sample"
 	"github.com/stretchr/testify/require"
 )
 

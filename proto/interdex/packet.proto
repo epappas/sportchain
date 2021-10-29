@@ -3,7 +3,7 @@ package cosmonaut.interchange.interdex;
 
 // this line is used by starport scaffolding # proto/packet/import
 
-option go_package = "github.com/cosmonaut/interchange/x/interdex/types";
+option go_package = "github.com/cryptodata/interchange/x/interdex/types";
 
 message InterdexPacketData {
     oneof packet {

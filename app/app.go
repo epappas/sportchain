@@ -86,10 +86,13 @@ import (
 	"github.com/tendermint/spm/cosmoscmd"
 	"github.com/tendermint/spm/openapiconsole"
 
-	"github.com/cosmonaut/interchange/docs"
-	interdexmodule "github.com/cosmonaut/interchange/x/interdex"
-	interdexmodulekeeper "github.com/cosmonaut/interchange/x/interdex/keeper"
-	interdexmoduletypes "github.com/cosmonaut/interchange/x/interdex/types"
+	"github.com/cryptodata/interchange/docs"
+	consumingmodule "github.com/cryptodata/interchange/x/consuming"
+	consumingmodulekeeper "github.com/cryptodata/interchange/x/consuming/keeper"
+	consumingmoduletypes "github.com/cryptodata/interchange/x/consuming/types"
+	interdexmodule "github.com/cryptodata/interchange/x/interdex"
+	interdexmodulekeeper "github.com/cryptodata/interchange/x/interdex/keeper"
+	interdexmoduletypes "github.com/cryptodata/interchange/x/interdex/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -141,6 +144,7 @@ var (
 		transfer.AppModuleBasic{},
 		vesting.AppModuleBasic{},
 		interdexmodule.AppModuleBasic{},
+		consumingmodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -210,8 +214,10 @@ type App struct {
 	ScopedIBCKeeper      capabilitykeeper.ScopedKeeper
 	ScopedTransferKeeper capabilitykeeper.ScopedKeeper
 
-	ScopedInterdexKeeper capabilitykeeper.ScopedKeeper
-	InterdexKeeper       interdexmodulekeeper.Keeper
+	ScopedInterdexKeeper  capabilitykeeper.ScopedKeeper
+	InterdexKeeper        interdexmodulekeeper.Keeper
+	ScopedConsumingKeeper capabilitykeeper.ScopedKeeper
+	ConsumingKeeper       consumingmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// the module manager
@@ -246,6 +252,7 @@ func New(
 		govtypes.StoreKey, paramstypes.StoreKey, ibchost.StoreKey, upgradetypes.StoreKey, feegrant.StoreKey,
 		evidencetypes.StoreKey, ibctransfertypes.StoreKey, capabilitytypes.StoreKey,
 		interdexmoduletypes.StoreKey,
+		consumingmoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -357,12 +364,25 @@ func New(
 	)
 	interdexModule := interdexmodule.NewAppModule(appCodec, app.InterdexKeeper)
 
+	scopedConsumingKeeper := app.CapabilityKeeper.ScopeToModule(consumingmoduletypes.ModuleName)
+	app.ScopedConsumingKeeper = scopedConsumingKeeper
+	app.ConsumingKeeper = *consumingmodulekeeper.NewKeeper(
+		appCodec,
+		keys[consumingmoduletypes.StoreKey],
+		keys[consumingmoduletypes.MemStoreKey],
+		app.IBCKeeper.ChannelKeeper,
+		&app.IBCKeeper.PortKeeper,
+		scopedConsumingKeeper,
+	)
+	consumingModule := consumingmodule.NewAppModule(appCodec, app.ConsumingKeeper)
+
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	// Create static IBC router, add transfer route, then set and seal it
 	ibcRouter := ibcporttypes.NewRouter()
 	ibcRouter.AddRoute(ibctransfertypes.ModuleName, transferModule)
 	ibcRouter.AddRoute(interdexmoduletypes.ModuleName, interdexModule)
+	ibcRouter.AddRoute(consumingmoduletypes.ModuleName, consumingModule)
 	// this line is used by starport scaffolding # ibc/app/router
 	app.IBCKeeper.SetRouter(ibcRouter)
 
@@ -397,6 +417,7 @@ func New(
 		params.NewAppModule(app.ParamsKeeper),
 		transferModule,
 		interdexModule,
+		consumingModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
@@ -432,6 +453,7 @@ func New(
 		evidencetypes.ModuleName,
 		ibctransfertypes.ModuleName,
 		interdexmoduletypes.ModuleName,
+		consumingmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
@@ -620,6 +642,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(ibctransfertypes.ModuleName)
 	paramsKeeper.Subspace(ibchost.ModuleName)
 	paramsKeeper.Subspace(interdexmoduletypes.ModuleName)
+	paramsKeeper.Subspace(consumingmoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper

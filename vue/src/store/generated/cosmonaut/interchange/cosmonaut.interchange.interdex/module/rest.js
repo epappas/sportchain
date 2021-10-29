@@ -142,10 +142,10 @@ export class Api extends HttpClient {
          * @tags Query
          * @name QueryBuyOrderBookAll
          * @summary Queries a list of buyOrderBook items.
-         * @request GET:/cosmonaut/interchange/interdex/buyOrderBook
+         * @request GET:/cryptodata/interchange/interdex/buyOrderBook
          */
         this.queryBuyOrderBookAll = (query, params = {}) => this.request({
-            path: `/cosmonaut/interchange/interdex/buyOrderBook`,
+            path: `/cryptodata/interchange/interdex/buyOrderBook`,
             method: "GET",
             query: query,
             format: "json",
@@ -157,10 +157,10 @@ export class Api extends HttpClient {
          * @tags Query
          * @name QueryBuyOrderBook
          * @summary Queries a buyOrderBook by index.
-         * @request GET:/cosmonaut/interchange/interdex/buyOrderBook/{index}
+         * @request GET:/cryptodata/interchange/interdex/buyOrderBook/{index}
          */
         this.queryBuyOrderBook = (index, params = {}) => this.request({
-            path: `/cosmonaut/interchange/interdex/buyOrderBook/${index}`,
+            path: `/cryptodata/interchange/interdex/buyOrderBook/${index}`,
             method: "GET",
             format: "json",
             ...params,
@@ -171,10 +171,10 @@ export class Api extends HttpClient {
          * @tags Query
          * @name QueryDenomTraceAll
          * @summary Queries a list of denomTrace items.
-         * @request GET:/cosmonaut/interchange/interdex/denomTrace
+         * @request GET:/cryptodata/interchange/interdex/denomTrace
          */
         this.queryDenomTraceAll = (query, params = {}) => this.request({
-            path: `/cosmonaut/interchange/interdex/denomTrace`,
+            path: `/cryptodata/interchange/interdex/denomTrace`,
             method: "GET",
             query: query,
             format: "json",
@@ -186,10 +186,10 @@ export class Api extends HttpClient {
          * @tags Query
          * @name QueryDenomTrace
          * @summary Queries a denomTrace by index.
-         * @request GET:/cosmonaut/interchange/interdex/denomTrace/{index}
+         * @request GET:/cryptodata/interchange/interdex/denomTrace/{index}
          */
         this.queryDenomTrace = (index, params = {}) => this.request({
-            path: `/cosmonaut/interchange/interdex/denomTrace/${index}`,
+            path: `/cryptodata/interchange/interdex/denomTrace/${index}`,
             method: "GET",
             format: "json",
             ...params,
@@ -200,10 +200,10 @@ export class Api extends HttpClient {
          * @tags Query
          * @name QuerySellOrderBookAll
          * @summary Queries a list of sellOrderBook items.
-         * @request GET:/cosmonaut/interchange/interdex/sellOrderBook
+         * @request GET:/cryptodata/interchange/interdex/sellOrderBook
          */
         this.querySellOrderBookAll = (query, params = {}) => this.request({
-            path: `/cosmonaut/interchange/interdex/sellOrderBook`,
+            path: `/cryptodata/interchange/interdex/sellOrderBook`,
             method: "GET",
             query: query,
             format: "json",
@@ -215,10 +215,10 @@ export class Api extends HttpClient {
          * @tags Query
          * @name QuerySellOrderBook
          * @summary Queries a sellOrderBook by index.
-         * @request GET:/cosmonaut/interchange/interdex/sellOrderBook/{index}
+         * @request GET:/cryptodata/interchange/interdex/sellOrderBook/{index}
          */
         this.querySellOrderBook = (index, params = {}) => this.request({
-            path: `/cosmonaut/interchange/interdex/sellOrderBook/${index}`,
+            path: `/cryptodata/interchange/interdex/sellOrderBook/${index}`,
             method: "GET",
             format: "json",
             ...params,

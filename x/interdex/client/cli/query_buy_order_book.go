@@ -5,9 +5,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/cosmonaut/interchange/x/interdex/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
+	"github.com/cryptodata/interchange/x/interdex/types"
 )
 
 func CmdListBuyOrderBook() *cobra.Command {

@@ -1,9 +1,9 @@
 package keeper
 
 import (
-	"github.com/cosmonaut/interchange/x/interdex/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cryptodata/interchange/x/interdex/types"
 )
 
 // SetBuyOrderBook set a specific buyOrderBook in the store from its index

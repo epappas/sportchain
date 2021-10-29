@@ -1,0 +1,36 @@
+syntax = "proto3";
+package cosmonaut.interchange.consuming;
+
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "consuming/gold_price.proto";
+// this line is used by starport scaffolding # 1
+
+option go_package = "github.com/cryptodata/interchange/x/consuming/types";
+
+// Query defines the gRPC querier service.
+service Query {
+
+  	// GoldPriceResult defines a rpc handler method for MsgGoldPriceData.
+  	rpc GoldPriceResult(QueryGoldPriceRequest) returns (QueryGoldPriceResponse) {
+		option (google.api.http).get = "/interchange/consuming/gold_price_result/{request_id}";
+  	}
+
+  	// LastGoldPriceId query the last GoldPrice result id
+  	rpc LastGoldPriceId(QueryLastGoldPriceIdRequest) returns (QueryLastGoldPriceIdResponse) {
+		option (google.api.http).get = "/interchange/consuming/last_gold_price_id";
+  	}
+// this line is used by starport scaffolding # 2
+}
+
+message QueryGoldPriceRequest {int64 request_id = 1;}
+
+message QueryGoldPriceResponse {
+  GoldPriceResult result = 1;
+}
+
+message QueryLastGoldPriceIdRequest {}
+
+message QueryLastGoldPriceIdResponse {int64 request_id = 1;}
+
+// this line is used by starport scaffolding # 3

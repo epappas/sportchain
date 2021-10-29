@@ -9,38 +9,38 @@ import "interdex/denom_trace.proto";
 // this line is used by starport scaffolding # 1
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/cosmonaut/interchange/x/interdex/types";
+option go_package = "github.com/cryptodata/interchange/x/interdex/types";
 
 // Query defines the gRPC querier service.
 service Query {
     // Queries a sellOrderBook by index.
 	rpc SellOrderBook(QueryGetSellOrderBookRequest) returns (QueryGetSellOrderBookResponse) {
-		option (google.api.http).get = "/cosmonaut/interchange/interdex/sellOrderBook/{index}";
+		option (google.api.http).get = "/cryptodata/interchange/interdex/sellOrderBook/{index}";
 	}
 
 	// Queries a list of sellOrderBook items.
 	rpc SellOrderBookAll(QueryAllSellOrderBookRequest) returns (QueryAllSellOrderBookResponse) {
-		option (google.api.http).get = "/cosmonaut/interchange/interdex/sellOrderBook";
+		option (google.api.http).get = "/cryptodata/interchange/interdex/sellOrderBook";
 	}
 
 // Queries a buyOrderBook by index.
 	rpc BuyOrderBook(QueryGetBuyOrderBookRequest) returns (QueryGetBuyOrderBookResponse) {
-		option (google.api.http).get = "/cosmonaut/interchange/interdex/buyOrderBook/{index}";
+		option (google.api.http).get = "/cryptodata/interchange/interdex/buyOrderBook/{index}";
 	}
 
 	// Queries a list of buyOrderBook items.
 	rpc BuyOrderBookAll(QueryAllBuyOrderBookRequest) returns (QueryAllBuyOrderBookResponse) {
-		option (google.api.http).get = "/cosmonaut/interchange/interdex/buyOrderBook";
+		option (google.api.http).get = "/cryptodata/interchange/interdex/buyOrderBook";
 	}
 
 // Queries a denomTrace by index.
 	rpc DenomTrace(QueryGetDenomTraceRequest) returns (QueryGetDenomTraceResponse) {
-		option (google.api.http).get = "/cosmonaut/interchange/interdex/denomTrace/{index}";
+		option (google.api.http).get = "/cryptodata/interchange/interdex/denomTrace/{index}";
 	}
 
 	// Queries a list of denomTrace items.
 	rpc DenomTraceAll(QueryAllDenomTraceRequest) returns (QueryAllDenomTraceResponse) {
-		option (google.api.http).get = "/cosmonaut/interchange/interdex/denomTrace";
+		option (google.api.http).get = "/cryptodata/interchange/interdex/denomTrace";
 	}
 
 // this line is used by starport scaffolding # 2

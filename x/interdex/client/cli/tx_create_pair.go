@@ -5,11 +5,11 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/cosmonaut/interchange/x/interdex/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	channelutils "github.com/cosmos/ibc-go/modules/core/04-channel/client/utils"
+	"github.com/cryptodata/interchange/x/interdex/types"
 )
 
 var _ = strconv.Itoa(0)

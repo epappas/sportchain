@@ -1,0 +1,12 @@
+syntax = "proto3";
+package cosmonaut.interchange.consuming;
+
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/cryptodata/interchange/x/consuming/types";
+
+// GenesisState defines the consuming module's genesis state.
+message GenesisState {
+    string port_id = 1;
+  // this line is used by starport scaffolding # genesis/proto/state
+}

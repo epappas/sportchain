@@ -105,6 +105,8 @@ github.com/aws/aws-lambda-go v1.13.3/go.mod h1:4UKl9IzQMoD+QF79YdCuzCwp8VbmG4VAQ
 github.com/aws/aws-sdk-go v1.25.48/go.mod h1:KmX6BPdI08NWTb3/sm4ZGu5ShLoqVDhKgpiN924inxo=
 github.com/aws/aws-sdk-go v1.27.0/go.mod h1:KmX6BPdI08NWTb3/sm4ZGu5ShLoqVDhKgpiN924inxo=
 github.com/aws/aws-sdk-go-v2 v0.18.0/go.mod h1:JWVYvqSMppoMJC0x5wdwiImzgXTI9FuZwxzkQq9wy+g=
+github.com/bandprotocol/bandchain-packet v0.0.2 h1:FySqsXp6sIh0kHiNBrkvt5CRmsrqTN2Bd26U7cebKxg=
+github.com/bandprotocol/bandchain-packet v0.0.2/go.mod h1:pk/wJxznWERdDVU2WWpzt8Tr0WvDSkT66JDYVdIECAo=
 github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973/go.mod h1:Dwedo/Wpr24TaqPxmxbtue+5NUziq4I4S80YR8gNf3Q=
 github.com/beorn7/perks v1.0.0/go.mod h1:KWe93zE9D1o94FZ5RNwFwVgaQK1VOXiVxmqh+CedLV8=
 github.com/beorn7/perks v1.0.1 h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM=
@@ -177,6 +179,7 @@ github.com/coreos/go-systemd v0.0.0-20190321100706-95778dfbb74e/go.mod h1:F5haX7
 github.com/coreos/go-systemd/v22 v22.3.2/go.mod h1:Y58oyj3AT4RCenI/lSvhwexgC+NSVTIJ3seZv2GcEnc=
 github.com/coreos/pkg v0.0.0-20160727233714-3ac0863d7acf/go.mod h1:E3G3o1h8I7cfcXa63jLwjI0eiQQMgzzUDFVpN/nH/eA=
 github.com/coreos/pkg v0.0.0-20180928190104-399ea9e2e55f/go.mod h1:E3G3o1h8I7cfcXa63jLwjI0eiQQMgzzUDFVpN/nH/eA=
+github.com/cosmos/cosmos-sdk v0.43.0/go.mod h1:ctcrTEAhei9s8O3KSNvL0dxe+fVQGp07QyRb/7H9JYE=
 github.com/cosmos/cosmos-sdk v0.44.0 h1:eOSjACNtTnThEJ62IsS+pMm3OIU6hgMVqrp4TZClLZo=
 github.com/cosmos/cosmos-sdk v0.44.0/go.mod h1:orG0jzFJ2KsDfzLd/X0JSOMzF4Oxc/BQz2GkcYF4gRE=
 github.com/cosmos/go-bip39 v0.0.0-20180819234021-555e2067c45d/go.mod h1:tSxLoYXyBmiFeKpvmq4dzayMdCjCnu8uqmCysIGBT2Y=
@@ -187,6 +190,7 @@ github.com/cosmos/iavl v0.15.0-rc5/go.mod h1:WqoPL9yPTQ85QBMT45OOUzPxG/U/JcJoN7u
 github.com/cosmos/iavl v0.15.3/go.mod h1:OLjQiAQ4fGD2KDZooyJG9yz+p2ao2IAYSbke8mVvSA4=
 github.com/cosmos/iavl v0.16.0 h1:ICIOB8xysirTX27GmVAaoeSpeozzgSu9d49w36xkVJA=
 github.com/cosmos/iavl v0.16.0/go.mod h1:2A8O/Jz9YwtjqXMO0CjnnbTYEEaovE8jWcwrakH3PoE=
+github.com/cosmos/ibc-go v1.0.0/go.mod h1:2wHKQUa+BLJMEyN635KrHfmTTwSNHBtXcqdY8JWGuXA=
 github.com/cosmos/ibc-go v1.2.0 h1:0RgxmKzCzIH9SwDp4ckL5VrzlO1KJ5hO0AsOAzOiWE4=
 github.com/cosmos/ibc-go v1.2.0/go.mod h1:wGjeNd+T4kpGrt0OC8DTiE/qXLrlmTPNpdoYsBZUjKI=
 github.com/cosmos/keyring v1.1.7-0.20210622111912-ef00f8ac3d76 h1:DdzS1m6o/pCqeZ8VOAit/gyATedRgjvkVI+UCrLpyuU=
@@ -806,6 +810,7 @@ github.com/tendermint/tendermint v0.34.0-rc4/go.mod h1:yotsojf2C1QBOw4dZrTcxbyxm
 github.com/tendermint/tendermint v0.34.0-rc6/go.mod h1:ugzyZO5foutZImv0Iyx/gOFCX6mjJTgbLHTwi17VDVg=
 github.com/tendermint/tendermint v0.34.0/go.mod h1:Aj3PIipBFSNO21r+Lq3TtzQ+uKESxkbA3yo/INM4QwQ=
 github.com/tendermint/tendermint v0.34.10/go.mod h1:aeHL7alPh4uTBIJQ8mgFEE8VwJLXI1VD3rVOmH2Mcy0=
+github.com/tendermint/tendermint v0.34.11/go.mod h1:aeHL7alPh4uTBIJQ8mgFEE8VwJLXI1VD3rVOmH2Mcy0=
 github.com/tendermint/tendermint v0.34.12/go.mod h1:aeHL7alPh4uTBIJQ8mgFEE8VwJLXI1VD3rVOmH2Mcy0=
 github.com/tendermint/tendermint v0.34.13 h1:fu+tsHudbOr5PvepjH0q47Jae59hQAvn3IqAHv2EbC8=
 github.com/tendermint/tendermint v0.34.13/go.mod h1:6RVVRBqwtKhA+H59APKumO+B7Nye4QXSFc6+TYxAxCI=

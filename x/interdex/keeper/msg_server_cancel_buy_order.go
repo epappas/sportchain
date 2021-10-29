@@ -3,8 +3,8 @@ package keeper
 import (
 	"context"
 
-	"github.com/cosmonaut/interchange/x/interdex/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cryptodata/interchange/x/interdex/types"
 )
 
 func (k msgServer) CancelBuyOrder(goCtx context.Context, msg *types.MsgCancelBuyOrder) (*types.MsgCancelBuyOrderResponse, error) {

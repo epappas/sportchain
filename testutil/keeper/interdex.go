@@ -3,8 +3,6 @@ package keeper
 import (
 	"testing"
 
-	"github.com/cosmonaut/interchange/x/interdex/keeper"
-	"github.com/cosmonaut/interchange/x/interdex/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/store"
@@ -13,6 +11,8 @@ import (
 	capabilitykeeper "github.com/cosmos/cosmos-sdk/x/capability/keeper"
 	typesparams "github.com/cosmos/cosmos-sdk/x/params/types"
 	ibckeeper "github.com/cosmos/ibc-go/modules/core/keeper"
+	"github.com/cryptodata/interchange/x/interdex/keeper"
+	"github.com/cryptodata/interchange/x/interdex/types"
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/libs/log"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"

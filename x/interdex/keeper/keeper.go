@@ -5,9 +5,9 @@ import (
 
 	"github.com/tendermint/tendermint/libs/log"
 
-	"github.com/cosmonaut/interchange/x/interdex/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cryptodata/interchange/x/interdex/types"
 )
 
 type (

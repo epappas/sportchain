@@ -367,7 +367,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @tags Query
    * @name QueryBuyOrderBookAll
    * @summary Queries a list of buyOrderBook items.
-   * @request GET:/cosmonaut/interchange/interdex/buyOrderBook
+   * @request GET:/cryptodata/interchange/interdex/buyOrderBook
    */
   queryBuyOrderBookAll = (
     query?: {
@@ -380,7 +380,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     params: RequestParams = {},
   ) =>
     this.request<InterdexQueryAllBuyOrderBookResponse, RpcStatus>({
-      path: `/cosmonaut/interchange/interdex/buyOrderBook`,
+      path: `/cryptodata/interchange/interdex/buyOrderBook`,
       method: "GET",
       query: query,
       format: "json",
@@ -393,11 +393,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @tags Query
    * @name QueryBuyOrderBook
    * @summary Queries a buyOrderBook by index.
-   * @request GET:/cosmonaut/interchange/interdex/buyOrderBook/{index}
+   * @request GET:/cryptodata/interchange/interdex/buyOrderBook/{index}
    */
   queryBuyOrderBook = (index: string, params: RequestParams = {}) =>
     this.request<InterdexQueryGetBuyOrderBookResponse, RpcStatus>({
-      path: `/cosmonaut/interchange/interdex/buyOrderBook/${index}`,
+      path: `/cryptodata/interchange/interdex/buyOrderBook/${index}`,
       method: "GET",
       format: "json",
       ...params,
@@ -409,7 +409,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @tags Query
    * @name QueryDenomTraceAll
    * @summary Queries a list of denomTrace items.
-   * @request GET:/cosmonaut/interchange/interdex/denomTrace
+   * @request GET:/cryptodata/interchange/interdex/denomTrace
    */
   queryDenomTraceAll = (
     query?: {
@@ -422,7 +422,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     params: RequestParams = {},
   ) =>
     this.request<InterdexQueryAllDenomTraceResponse, RpcStatus>({
-      path: `/cosmonaut/interchange/interdex/denomTrace`,
+      path: `/cryptodata/interchange/interdex/denomTrace`,
       method: "GET",
       query: query,
       format: "json",
@@ -435,11 +435,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @tags Query
    * @name QueryDenomTrace
    * @summary Queries a denomTrace by index.
-   * @request GET:/cosmonaut/interchange/interdex/denomTrace/{index}
+   * @request GET:/cryptodata/interchange/interdex/denomTrace/{index}
    */
   queryDenomTrace = (index: string, params: RequestParams = {}) =>
     this.request<InterdexQueryGetDenomTraceResponse, RpcStatus>({
-      path: `/cosmonaut/interchange/interdex/denomTrace/${index}`,
+      path: `/cryptodata/interchange/interdex/denomTrace/${index}`,
       method: "GET",
       format: "json",
       ...params,
@@ -451,7 +451,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @tags Query
    * @name QuerySellOrderBookAll
    * @summary Queries a list of sellOrderBook items.
-   * @request GET:/cosmonaut/interchange/interdex/sellOrderBook
+   * @request GET:/cryptodata/interchange/interdex/sellOrderBook
    */
   querySellOrderBookAll = (
     query?: {
@@ -464,7 +464,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     params: RequestParams = {},
   ) =>
     this.request<InterdexQueryAllSellOrderBookResponse, RpcStatus>({
-      path: `/cosmonaut/interchange/interdex/sellOrderBook`,
+      path: `/cryptodata/interchange/interdex/sellOrderBook`,
       method: "GET",
       query: query,
       format: "json",
@@ -477,11 +477,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @tags Query
    * @name QuerySellOrderBook
    * @summary Queries a sellOrderBook by index.
-   * @request GET:/cosmonaut/interchange/interdex/sellOrderBook/{index}
+   * @request GET:/cryptodata/interchange/interdex/sellOrderBook/{index}
    */
   querySellOrderBook = (index: string, params: RequestParams = {}) =>
     this.request<InterdexQueryGetSellOrderBookResponse, RpcStatus>({
-      path: `/cosmonaut/interchange/interdex/sellOrderBook/${index}`,
+      path: `/cryptodata/interchange/interdex/sellOrderBook/${index}`,
       method: "GET",
       format: "json",
       ...params,

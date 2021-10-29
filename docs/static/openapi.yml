@@ -4,7 +4,84 @@ info:
   name: ''
   description: ''
 paths:
-  /cosmonaut/interchange/interdex/buyOrderBook:
+  '/interchange/consuming/gold_price_result/{requestId}':
+    get:
+      summary: GoldPriceResult defines a rpc handler method for MsgGoldPriceData.
+      operationId: CosmonautInterchangeConsumingGoldPriceResult
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              result:
+                type: object
+                properties:
+                  rates:
+                    type: array
+                    items:
+                      type: string
+                      format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: requestId
+          in: path
+          required: true
+          type: string
+          format: int64
+      tags:
+        - Query
+  /interchange/consuming/last_gold_price_id:
+    get:
+      summary: LastGoldPriceId query the last GoldPrice result id
+      operationId: CosmonautInterchangeConsumingLastGoldPriceId
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              requestId:
+                type: string
+                format: int64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /cryptodata/interchange/interdex/buyOrderBook:
     get:
       summary: Queries a list of buyOrderBook items.
       operationId: CosmonautInterchangeInterdexBuyOrderBookAll
@@ -126,7 +203,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmonaut/interchange/interdex/buyOrderBook/{index}':
+  '/cryptodata/interchange/interdex/buyOrderBook/{index}':
     get:
       summary: Queries a buyOrderBook by index.
       operationId: CosmonautInterchangeInterdexBuyOrderBook
@@ -170,7 +247,7 @@ paths:
           type: string
       tags:
         - Query
-  /cosmonaut/interchange/interdex/denomTrace:
+  /cryptodata/interchange/interdex/denomTrace:
     get:
       summary: Queries a list of denomTrace items.
       operationId: CosmonautInterchangeInterdexDenomTraceAll
@@ -294,7 +371,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmonaut/interchange/interdex/denomTrace/{index}':
+  '/cryptodata/interchange/interdex/denomTrace/{index}':
     get:
       summary: Queries a denomTrace by index.
       operationId: CosmonautInterchangeInterdexDenomTrace
@@ -340,7 +417,7 @@ paths:
           type: string
       tags:
         - Query
-  /cosmonaut/interchange/interdex/sellOrderBook:
+  /cryptodata/interchange/interdex/sellOrderBook:
     get:
       summary: Queries a list of sellOrderBook items.
       operationId: CosmonautInterchangeInterdexSellOrderBookAll
@@ -462,7 +539,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/cosmonaut/interchange/interdex/sellOrderBook/{index}':
+  '/cryptodata/interchange/interdex/sellOrderBook/{index}':
     get:
       summary: Queries a sellOrderBook by index.
       operationId: CosmonautInterchangeInterdexSellOrderBook
@@ -13004,275 +13081,55 @@ paths:
       tags:
         - Query
 definitions:
-  cosmonaut.interchange.interdex.BuyOrderBook:
+  cosmonaut.interchange.consuming.GoldPriceCallData:
     type: object
     properties:
-      index:
-        type: string
-      amountDenom:
-        type: string
-      priceDenom:
-        type: string
-  cosmonaut.interchange.interdex.DenomTrace:
-    type: object
-    properties:
-      index:
-        type: string
-      port:
-        type: string
-      channel:
-        type: string
-      origin:
-        type: string
-  cosmonaut.interchange.interdex.MsgCancelBuyOrderResponse:
-    type: object
-  cosmonaut.interchange.interdex.MsgCancelSellOrderResponse:
-    type: object
-  cosmonaut.interchange.interdex.MsgSendBuyOrderResponse:
-    type: object
-  cosmonaut.interchange.interdex.MsgSendCreatePairResponse:
-    type: object
-  cosmonaut.interchange.interdex.MsgSendSellOrderResponse:
-    type: object
-  cosmonaut.interchange.interdex.QueryAllBuyOrderBookResponse:
-    type: object
-    properties:
-      buyOrderBook:
+      symbols:
         type: array
         items:
-          type: object
-          properties:
-            index:
-              type: string
-            amountDenom:
-              type: string
-            priceDenom:
-              type: string
-      pagination:
-        type: object
-        properties:
-          nextKey:
-            type: string
-            format: byte
-            title: |-
-              next_key is the key to be passed to PageRequest.key to
-              query the next page most efficiently
-          total:
-            type: string
-            format: uint64
-            title: >-
-              total is total number of results available if
-              PageRequest.count_total
-
-              was set, its value is undefined otherwise
-        description: |-
-          PageResponse is to be embedded in gRPC response messages where the
-          corresponding request message has used PageRequest.
-
-           message SomeResponse {
-                   repeated Bar results = 1;
-                   PageResponse page = 2;
-           }
-  cosmonaut.interchange.interdex.QueryAllDenomTraceResponse:
-    type: object
-    properties:
-      denomTrace:
-        type: array
-        items:
-          type: object
-          properties:
-            index:
-              type: string
-            port:
-              type: string
-            channel:
-              type: string
-            origin:
-              type: string
-      pagination:
-        type: object
-        properties:
-          nextKey:
-            type: string
-            format: byte
-            title: |-
-              next_key is the key to be passed to PageRequest.key to
-              query the next page most efficiently
-          total:
-            type: string
-            format: uint64
-            title: >-
-              total is total number of results available if
-              PageRequest.count_total
-
-              was set, its value is undefined otherwise
-        description: |-
-          PageResponse is to be embedded in gRPC response messages where the
-          corresponding request message has used PageRequest.
-
-           message SomeResponse {
-                   repeated Bar results = 1;
-                   PageResponse page = 2;
-           }
-  cosmonaut.interchange.interdex.QueryAllSellOrderBookResponse:
-    type: object
-    properties:
-      sellOrderBook:
-        type: array
-        items:
-          type: object
-          properties:
-            index:
-              type: string
-            amountDenom:
-              type: string
-            priceDenom:
-              type: string
-      pagination:
-        type: object
-        properties:
-          nextKey:
-            type: string
-            format: byte
-            title: |-
-              next_key is the key to be passed to PageRequest.key to
-              query the next page most efficiently
-          total:
-            type: string
-            format: uint64
-            title: >-
-              total is total number of results available if
-              PageRequest.count_total
-
-              was set, its value is undefined otherwise
-        description: |-
-          PageResponse is to be embedded in gRPC response messages where the
-          corresponding request message has used PageRequest.
-
-           message SomeResponse {
-                   repeated Bar results = 1;
-                   PageResponse page = 2;
-           }
-  cosmonaut.interchange.interdex.QueryGetBuyOrderBookResponse:
-    type: object
-    properties:
-      buyOrderBook:
-        type: object
-        properties:
-          index:
-            type: string
-          amountDenom:
-            type: string
-          priceDenom:
-            type: string
-  cosmonaut.interchange.interdex.QueryGetDenomTraceResponse:
-    type: object
-    properties:
-      denomTrace:
-        type: object
-        properties:
-          index:
-            type: string
-          port:
-            type: string
-          channel:
-            type: string
-          origin:
-            type: string
-  cosmonaut.interchange.interdex.QueryGetSellOrderBookResponse:
-    type: object
-    properties:
-      sellOrderBook:
-        type: object
-        properties:
-          index:
-            type: string
-          amountDenom:
-            type: string
-          priceDenom:
-            type: string
-  cosmonaut.interchange.interdex.SellOrderBook:
-    type: object
-    properties:
-      index:
-        type: string
-      amountDenom:
-        type: string
-      priceDenom:
-        type: string
-  cosmos.base.query.v1beta1.PageRequest:
-    type: object
-    properties:
-      key:
-        type: string
-        format: byte
-        description: |-
-          key is a value returned in PageResponse.next_key to begin
-          querying the next page most efficiently. Only one of offset or key
-          should be set.
-      offset:
+          type: string
+      multiplier:
         type: string
         format: uint64
-        description: |-
-          offset is a numeric offset that can be used when key is unavailable.
-          It is less efficient than using key. Only one of offset or key should
-          be set.
-      limit:
+  cosmonaut.interchange.consuming.GoldPriceResult:
+    type: object
+    properties:
+      rates:
+        type: array
+        items:
+          type: string
+          format: uint64
+  cosmonaut.interchange.consuming.MsgGoldPriceDataResponse:
+    type: object
+  cosmonaut.interchange.consuming.QueryGoldPriceResponse:
+    type: object
+    properties:
+      result:
+        type: object
+        properties:
+          rates:
+            type: array
+            items:
+              type: string
+              format: uint64
+  cosmonaut.interchange.consuming.QueryLastGoldPriceIdResponse:
+    type: object
+    properties:
+      requestId:
         type: string
-        format: uint64
-        description: >-
-          limit is the total number of results to be returned in the result
-          page.
-
-          If left empty it will default to a value to be set by each app.
-      countTotal:
-        type: boolean
-        description: >-
-          count_total is set to true  to indicate that the result set should
-          include
-
-          a count of the total number of items available for pagination in UIs.
-
-          count_total is only respected when offset is used. It is ignored when
-          key
-
-          is set.
-      reverse:
-        type: boolean
-        description: >-
-          reverse is set to true if results are to be returned in the descending
-          order.
+        format: int64
+  cosmos.base.v1beta1.Coin:
+    type: object
+    properties:
+      denom:
+        type: string
+      amount:
+        type: string
     description: |-
-      message SomeRequest {
-               Foo some_parameter = 1;
-               PageRequest pagination = 2;
-       }
-    title: |-
-      PageRequest is to be embedded in gRPC request messages for efficient
-      pagination. Ex:
-  cosmos.base.query.v1beta1.PageResponse:
-    type: object
-    properties:
-      nextKey:
-        type: string
-        format: byte
-        title: |-
-          next_key is the key to be passed to PageRequest.key to
-          query the next page most efficiently
-      total:
-        type: string
-        format: uint64
-        title: |-
-          total is total number of results available if PageRequest.count_total
-          was set, its value is undefined otherwise
-    description: |-
-      PageResponse is to be embedded in gRPC response messages where the
-      corresponding request message has used PageRequest.
+      Coin defines a token with a denomination and an amount.
 
-       message SomeResponse {
-               repeated Bar results = 1;
-               PageResponse page = 2;
-       }
+      NOTE: The amount field is an Int which implements the custom method
+      signatures required by gogoproto.
   google.protobuf.Any:
     type: object
     properties:
@@ -13596,6 +13453,275 @@ definitions:
                   "@type": "type.googleapis.com/google.protobuf.Duration",
                   "value": "1.212s"
                 }
+  cosmonaut.interchange.interdex.BuyOrderBook:
+    type: object
+    properties:
+      index:
+        type: string
+      amountDenom:
+        type: string
+      priceDenom:
+        type: string
+  cosmonaut.interchange.interdex.DenomTrace:
+    type: object
+    properties:
+      index:
+        type: string
+      port:
+        type: string
+      channel:
+        type: string
+      origin:
+        type: string
+  cosmonaut.interchange.interdex.MsgCancelBuyOrderResponse:
+    type: object
+  cosmonaut.interchange.interdex.MsgCancelSellOrderResponse:
+    type: object
+  cosmonaut.interchange.interdex.MsgSendBuyOrderResponse:
+    type: object
+  cosmonaut.interchange.interdex.MsgSendCreatePairResponse:
+    type: object
+  cosmonaut.interchange.interdex.MsgSendSellOrderResponse:
+    type: object
+  cosmonaut.interchange.interdex.QueryAllBuyOrderBookResponse:
+    type: object
+    properties:
+      buyOrderBook:
+        type: array
+        items:
+          type: object
+          properties:
+            index:
+              type: string
+            amountDenom:
+              type: string
+            priceDenom:
+              type: string
+      pagination:
+        type: object
+        properties:
+          nextKey:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  cosmonaut.interchange.interdex.QueryAllDenomTraceResponse:
+    type: object
+    properties:
+      denomTrace:
+        type: array
+        items:
+          type: object
+          properties:
+            index:
+              type: string
+            port:
+              type: string
+            channel:
+              type: string
+            origin:
+              type: string
+      pagination:
+        type: object
+        properties:
+          nextKey:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  cosmonaut.interchange.interdex.QueryAllSellOrderBookResponse:
+    type: object
+    properties:
+      sellOrderBook:
+        type: array
+        items:
+          type: object
+          properties:
+            index:
+              type: string
+            amountDenom:
+              type: string
+            priceDenom:
+              type: string
+      pagination:
+        type: object
+        properties:
+          nextKey:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  cosmonaut.interchange.interdex.QueryGetBuyOrderBookResponse:
+    type: object
+    properties:
+      buyOrderBook:
+        type: object
+        properties:
+          index:
+            type: string
+          amountDenom:
+            type: string
+          priceDenom:
+            type: string
+  cosmonaut.interchange.interdex.QueryGetDenomTraceResponse:
+    type: object
+    properties:
+      denomTrace:
+        type: object
+        properties:
+          index:
+            type: string
+          port:
+            type: string
+          channel:
+            type: string
+          origin:
+            type: string
+  cosmonaut.interchange.interdex.QueryGetSellOrderBookResponse:
+    type: object
+    properties:
+      sellOrderBook:
+        type: object
+        properties:
+          index:
+            type: string
+          amountDenom:
+            type: string
+          priceDenom:
+            type: string
+  cosmonaut.interchange.interdex.SellOrderBook:
+    type: object
+    properties:
+      index:
+        type: string
+      amountDenom:
+        type: string
+      priceDenom:
+        type: string
+  cosmos.base.query.v1beta1.PageRequest:
+    type: object
+    properties:
+      key:
+        type: string
+        format: byte
+        description: |-
+          key is a value returned in PageResponse.next_key to begin
+          querying the next page most efficiently. Only one of offset or key
+          should be set.
+      offset:
+        type: string
+        format: uint64
+        description: |-
+          offset is a numeric offset that can be used when key is unavailable.
+          It is less efficient than using key. Only one of offset or key should
+          be set.
+      limit:
+        type: string
+        format: uint64
+        description: >-
+          limit is the total number of results to be returned in the result
+          page.
+
+          If left empty it will default to a value to be set by each app.
+      countTotal:
+        type: boolean
+        description: >-
+          count_total is set to true  to indicate that the result set should
+          include
+
+          a count of the total number of items available for pagination in UIs.
+
+          count_total is only respected when offset is used. It is ignored when
+          key
+
+          is set.
+      reverse:
+        type: boolean
+        description: >-
+          reverse is set to true if results are to be returned in the descending
+          order.
+    description: |-
+      message SomeRequest {
+               Foo some_parameter = 1;
+               PageRequest pagination = 2;
+       }
+    title: |-
+      PageRequest is to be embedded in gRPC request messages for efficient
+      pagination. Ex:
+  cosmos.base.query.v1beta1.PageResponse:
+    type: object
+    properties:
+      nextKey:
+        type: string
+        format: byte
+        title: |-
+          next_key is the key to be passed to PageRequest.key to
+          query the next page most efficiently
+      total:
+        type: string
+        format: uint64
+        title: |-
+          total is total number of results available if PageRequest.count_total
+          was set, its value is undefined otherwise
+    description: |-
+      PageResponse is to be embedded in gRPC response messages where the
+      corresponding request message has used PageRequest.
+
+       message SomeResponse {
+               repeated Bar results = 1;
+               PageResponse page = 2;
+       }
   cosmos.authz.v1beta1.Grant:
     type: object
     properties:
@@ -14453,18 +14579,6 @@ definitions:
     description: |-
       SendEnabled maps coin denom to a send_enabled status (whether a denom is
       sendable).
-  cosmos.base.v1beta1.Coin:
-    type: object
-    properties:
-      denom:
-        type: string
-      amount:
-        type: string
-    description: |-
-      Coin defines a token with a denomination and an amount.
-
-      NOTE: The amount field is an Int which implements the custom method
-      signatures required by gogoproto.
   cosmos.crisis.v1beta1.MsgVerifyInvariantResponse:
     type: object
     description: MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type.

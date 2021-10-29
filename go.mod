@@ -1,8 +1,9 @@
-module github.com/cosmonaut/interchange
+module github.com/cryptodata/interchange
 
 go 1.16
 
 require (
+	github.com/bandprotocol/bandchain-packet v0.0.2
 	github.com/cosmos/cosmos-sdk v0.44.0
 	github.com/cosmos/ibc-go v1.2.0
 	github.com/gogo/protobuf v1.3.3

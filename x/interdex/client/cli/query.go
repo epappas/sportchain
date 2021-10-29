@@ -10,7 +10,7 @@ import (
 	// "github.com/cosmos/cosmos-sdk/client/flags"
 	// sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/cosmonaut/interchange/x/interdex/types"
+	"github.com/cryptodata/interchange/x/interdex/types"
 )
 
 // GetQueryCmd returns the cli query commands for this module

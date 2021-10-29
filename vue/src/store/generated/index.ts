@@ -1,16 +1,18 @@
 // THIS FILE IS GENERATED AUTOMATICALLY. DO NOT MODIFY.
 
-import CosmonautInterchangeCosmonautInterchangeInterdex from './cosmonaut/interchange/cosmonaut.interchange.interdex'
+import CosmonautInterchangeCosmonautInterchangeConsuming from './cryptodata/interchange/cosmonaut.interchange.consuming'
+import CosmonautInterchangeCosmonautInterchangeInterdex from './cryptodata/interchange/cosmonaut.interchange.interdex'
 
 
-export default { 
+export default {
+  CosmonautInterchangeCosmonautInterchangeConsuming: load(CosmonautInterchangeCosmonautInterchangeConsuming, 'cosmonaut.interchange.consuming'),
   CosmonautInterchangeCosmonautInterchangeInterdex: load(CosmonautInterchangeCosmonautInterchangeInterdex, 'cosmonaut.interchange.interdex'),
-  
+
 }
 
 
 function load(mod, fullns) {
-    return function init(store) {        
+    return function init(store) {
         if (store.hasModule([fullns])) {
             throw new Error('Duplicate module name detected: '+ fullns)
         }else{

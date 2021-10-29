@@ -8,7 +8,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	// "github.com/cosmos/cosmos-sdk/client/flags"
-	"github.com/cosmonaut/interchange/x/interdex/types"
+	"github.com/cryptodata/interchange/x/interdex/types"
 )
 
 var (

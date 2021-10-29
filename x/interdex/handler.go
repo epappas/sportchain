@@ -3,10 +3,10 @@ package interdex
 import (
 	"fmt"
 
-	"github.com/cosmonaut/interchange/x/interdex/keeper"
-	"github.com/cosmonaut/interchange/x/interdex/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/cryptodata/interchange/x/interdex/keeper"
+	"github.com/cryptodata/interchange/x/interdex/types"
 )
 
 // NewHandler ...

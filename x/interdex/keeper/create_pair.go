@@ -3,12 +3,12 @@ package keeper
 import (
 	"errors"
 
-	"github.com/cosmonaut/interchange/x/interdex/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	clienttypes "github.com/cosmos/ibc-go/modules/core/02-client/types"
 	channeltypes "github.com/cosmos/ibc-go/modules/core/04-channel/types"
 	host "github.com/cosmos/ibc-go/modules/core/24-host"
+	"github.com/cryptodata/interchange/x/interdex/types"
 )
 
 // TransmitCreatePairPacket transmits the packet over IBC with the specified source port and source channel
